@@ -10,7 +10,9 @@ Rewrite the original readme with a  compact version
 ## Principles
 
 * Initialize a webdriver (https://chromedriver.chromium.org/ for Chrome and https://github.com/mozilla/geckodriver/releases for FireFox) with the installed path (e.g., ```python driver = webdriver.Chrome(executable_path="<your-webdriver-path>")```)
-* 
+* Warming up time for user signing in, checkout to the delivery decision page
+* Periodic refresh and literally check the html page to decide if there is any available slot
+* If found, beep automatically
 
 ## MISC
 
