@@ -7,12 +7,14 @@ import time
 import os
 
 
+DRIVER_PATH = "/Users/liangchengyu/Downloads/chromedriver"
+
 def getWFSlot(productUrl):
    headers = {
        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36',
    }
 
-   driver = webdriver.Chrome()
+   driver = webdriver.Chrome(executable_path=DRIVER_PATH)
    driver.get(productUrl)           
    html = driver.page_source
    soup = bs4.BeautifulSoup(html, "html.parser")
@@ -27,10 +29,10 @@ def getWFSlot(productUrl):
       time.sleep(4)
 
       try:
-         slot_opened_text = "Not available"
+         slot_not_available_text = "Not available"
          all_dates = soup.findAll("div", {"class": "ufss-date-select-toggle-text-availability"})
          for each_date in all_dates:
-            if slot_opened_text not in each_date.text:
+            if slot_not_available_text not in each_date.text:
                print('SLOTS OPEN 2!')
                os.system('say "Slots for delivery opened!"')
                no_open_slots = False
