@@ -6,8 +6,12 @@ import sys
 import time
 import os
 
+import random
 
 DRIVER_PATH = "/Users/liangchengyu/Downloads/chromedriver"
+REFRESH_PERIOD_S_MIN = 10
+REFRESH_PERIOD_S_MAX = 15
+
 
 def getWFSlot(productUrl):
    headers = {
@@ -18,7 +22,7 @@ def getWFSlot(productUrl):
    driver.get(productUrl)           
    html = driver.page_source
    soup = bs4.BeautifulSoup(html, "html.parser")
-   time.sleep(60)
+   time.sleep(180)
    no_open_slots = True
 
    while no_open_slots:
@@ -26,7 +30,7 @@ def getWFSlot(productUrl):
       print("refreshed")
       html = driver.page_source
       soup = bs4.BeautifulSoup(html, "html.parser")
-      time.sleep(4)
+      time.sleep(random.randint(REFRESH_PERIOD_S_MIN,REFRESH_PERIOD_S_MAX)) 
 
       try:
          slot_not_available_text = "Not available"
