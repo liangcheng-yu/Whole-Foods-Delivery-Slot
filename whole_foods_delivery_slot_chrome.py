@@ -39,8 +39,7 @@ def getWFSlot(productUrl):
             if slot_not_available_text not in each_date.text:
                print('SLOTS OPEN 2!')
                os.system('say "Slots for delivery opened!"')
-               no_open_slots = False
-               time.sleep(1400)
+               time.sleep(60)
       except AttributeError:
          pass
 
@@ -51,21 +50,7 @@ def getWFSlot(productUrl):
       except AttributeError: 
             print('SLOTS OPEN 3!')
             os.system('say "Slots for delivery opened!"')
-            no_open_slots = False
-
-
-      slot_patterns = ['Next available', '1-hour delivery windows', '2-hour delivery windows']
-      try:
-         next_slot_text = str([x.text for x in soup.findAll('h4', class_ ='ufss-slotgroup-heading-text a-text-normal')])
-         if any(next_slot_text in slot_pattern for slot_pattern in slot_patterns):
-            print('SLOTS OPEN!')
-            winsound.Beep(freq, duration)
-            no_open_slots = False
-
-            autoCheckout(driver)
-            
-      except AttributeError:
-         pass
+            time.sleep(60)
 
 
 getWFSlot('https://www.amazon.com/gp/buy/shipoptionselect/handlers/display.html?hasWorkingJavascript=1')
